@@ -1,6 +1,5 @@
 $( document ).ready(function() {
-    let buttonTeachers = document.getElementById("buttonTeachers");
-    getTeachers(buttonTeachers)
+    getTeachers('#buttonTeachers')
 })
 
 function mostrarModalAgregar() {
@@ -24,9 +23,9 @@ function checkButton(element) {
     $(element).addClass("hovered");
 }
 
-function getTeachers(element)
+function getTeachers()
 {
-    checkButton(element)
+    checkButton('#buttonTeachers')
 
     $.ajax({
         type: "POST",
@@ -162,6 +161,7 @@ function showTeachersTable(data) {
         <th>Ocupacion</th>
         <th>Titulo</th>
         <th>Trabaja con niños</th>
+        <th></th>
     </tr>`;
 
     data.forEach(teacher => {
@@ -180,11 +180,32 @@ function showTeachersTable(data) {
         htmlContent += "<td>" + teacher.ocupacion + "</td>";
         htmlContent += "<td>" + hasTitle + "</td>";
         htmlContent += "<td>" + workWithKids + "</td>";
+        htmlContent += `<td><button value="${teacher.id}" class="btn btn-danger" onclick="deleteTeacher(this)">Borrar</button></td>`;
         htmlContent += "</tr>";
     });
 
     htmlContent += "</table>";
     contenido.innerHTML = htmlContent;
+}
+
+function deleteTeacher(element) {
+    $.ajax({
+        type: "POST",
+        url: "app/controllers/TeacherController.php",
+        dataType: "json",
+        data: {
+            action: "deleteTeacher",
+            body: {teacherId: element.value}
+        },
+        success: function(data) {
+            if (data) {
+                getTeachers()
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(thrownError);
+        }
+    });
 }
 
 function showBooksTable(data) {

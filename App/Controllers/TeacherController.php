@@ -8,37 +8,50 @@ class TeacherController
     {
         try {
             $profesorModel = new Teacher();
-            $teachers = $profesorModel->getAll();
+            $result = $profesorModel->getAll();
         } catch (\Throwable $th) {
-            var_dump($th->getMessage());die;
+            $result = $th->getMessage();
         }
 
         header("Content-Type: application/json");
-        echo json_encode($teachers);
+        echo json_encode($result);
     }
 
     public function addTeacher(array $teacherData)
     {
         try {
             $profesorModel = new Teacher();
-            $teachers = $profesorModel->add($teacherData);
+            $result = $profesorModel->add($teacherData);
         } catch (\Throwable $th) {
-            var_dump($th->getMessage());die;
+            $result = $th->getMessage();
         }
 
         header("Content-Type: application/json");
-        echo json_encode($teachers);
+        echo json_encode($result);
+    }
+
+    public function deleteTeacher(array $teacherData)
+    {
+        try {
+            $profesorModel = new Teacher();
+            $result = $profesorModel->delete((int) $teacherData['teacherId']);
+        } catch (\Throwable $th) {
+            $result = $th->getMessage();
+        }
+
+        header("Content-Type: application/json");
+        echo json_encode($result);
     }
 }
 
-if (isset($_POST['action']) && $_POST['action'] === 'getTeachers')
-{
+if (isset($_POST['action'])) {
     $teacherController = new TeacherController();
-    $teacherController->getTeachers();
-}
+    $ordersCommission = [
+        'getTeachers' => fn () => $teacherController->getTeachers(),
+        'addTeacher' => fn () => $teacherController->addTeacher($_POST['body']),
+        'deleteTeacher' => fn () => $teacherController->deleteTeacher($_POST['body']),
+    ];
 
-if (isset($_POST['action']) && $_POST['action'] === 'addTeacher')
-{
-    $teacherController = new TeacherController();
-    $teacherController->addTeacher($_POST['body']);
+    $method = $ordersCommission[$_POST['action']];
+    $method($_POST['body']);
 }

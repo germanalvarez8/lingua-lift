@@ -49,9 +49,9 @@ CREATE TABLE IF NOT EXISTS clases (
     profesor_id INT NOT NULL,
     alumno_id INT NOT NULL,
     libro_id INT NOT NULL,
-    FOREIGN KEY (profesor_id) REFERENCES profesores(id),
-    FOREIGN KEY (alumno_id) REFERENCES alumnos(id),
-    FOREIGN KEY (libro_id) REFERENCES libros(id),
+    FOREIGN KEY (profesor_id) REFERENCES profesores(id) ON DELETE CASCADE,
+    FOREIGN KEY (alumno_id) REFERENCES alumnos(id) ON DELETE CASCADE,
+    FOREIGN KEY (libro_id) REFERENCES libros(id) ON DELETE CASCADE,
     UNIQUE (profesor_id, alumno_id, libro_id)
 );
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS pagos_alumnos (
     mes CHAR(50) NOT NULL,
     monto INT NOT NULL,
     cambio VARCHAR(50) NOT NULL DEFAULT 'ARS',
-    FOREIGN KEY (alumno_id) REFERENCES alumnos(id)
+    FOREIGN KEY (alumno_id) REFERENCES alumnos(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS pagos_profesores (
@@ -70,5 +70,5 @@ CREATE TABLE IF NOT EXISTS pagos_profesores (
     monto INT NOT NULL,
     cambio VARCHAR(50) NOT NULL,
     pagado INT(1) NOT NULL,
-    FOREIGN KEY (profesor_id) REFERENCES profesores(id)
+    FOREIGN KEY (profesor_id) REFERENCES profesores(id) ON DELETE CASCADE
 );

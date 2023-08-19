@@ -63,4 +63,11 @@ class Teacher
 
         return $stmt;
     }
+
+    public function delete($teacherId) {
+        $query = "delete from profesores where id=$teacherId limit 1";
+
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute();
+    }
 }
