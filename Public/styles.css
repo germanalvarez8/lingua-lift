@@ -129,7 +129,7 @@ nav {
 }
 
 .modal {
-    visibility: hidden; /* Cambiar display: none; a visibility: hidden; */
+    visibility: hidden;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -140,14 +140,6 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-/* Estilo para el contenido del modal */
-.modal-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 400px;
 }
 
 /* Estilo para el botón de cerrar */
@@ -164,4 +156,63 @@ nav {
     text-decoration: none;
     cursor: pointer;
 }
+*{box-sizing:border-box;}
 
+form {
+	overflow-y:scroll;
+	width:300px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+	background-color:#ccc;
+}
+
+form label{
+	width:100%;
+	font-weight:bold;
+	display:inline-block;
+}
+
+form select,
+form input[type="text"],
+form input[type="email"]{
+	width:100%;
+	padding:3px 10px;
+	border:1px solid #f6f6f6;
+	border-radius:3px;
+	background-color:#f6f6f6;
+	margin:8px 0;
+	display:inline-block;
+}
+
+button.add{
+	padding:8px 16px;
+	border:1px solid #000;
+	border-radius:5px;
+	display:block;
+	color:#fff;
+	background-color:#000;
+}
+
+form button:hover{
+	cursor:pointer;
+}
+
+textarea{
+	width:100%;
+	height:100px;
+	border:1px solid #f6f6f6;
+	border-radius:3px;
+	background-color:#f6f6f6;			
+	margin:8px 0;
+	/*resize: vertical | horizontal | none | both*/
+	resize:none;
+	display:block;
+}
+
+button.close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}

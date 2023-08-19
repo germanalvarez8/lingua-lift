@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mi Página</title>
+    <title>Lingua Lift</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="Public/styles.css">
 </head>
@@ -42,16 +42,37 @@
     </section>
 
     <div id="modalAgregar" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Agregar Profesor</h2>
-            <form id="formAgregarProfesor">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre">
-                <br>
-                <button type="submit">Agregar</button>
-            </form>
-        </div>
+        <form id="formDatosPersonales" name="formDatosPersonales">
+                <button class="close" onclick="ocultarModal()">×</button>
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre"/>
+
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="apellido"/>
+
+                <label for="dni">Dni</label>
+                <input type="text" name="dni" id="dni"/>
+
+                <label for="edad">Edad</label>
+                <input type="text" name="edad" id="edad"/>
+
+                <label for="nacionalidad">Nacionalidad</label>
+                <input type="text" name="nacionalidad" id="nacionalidad"/>
+
+                <label for="pais_residencia">Pais de residencia</label>
+                <input type="text" name="pais_residencia" id="pais_residencia"/>
+
+                <label for="horas_disponibles">Horas disponibles</label>
+                <input type="text" name="horas_disponibles" id="horas_disponibles"/>
+
+                <label for="ocupacion">Ocupacion</label>
+                <input type="text" name="ocupacion" id="ocupacion"/>
+
+                <label for="titulo">Titulo</label>
+                <input type ="text" name="titulo" id="titulo"/>
+
+                <button class="add" name="enviar" onclick="createTeacher(this)">Agregar</button>
+        </form>
     </div>
     <script src="js/scripts.js"></script>
 </body>

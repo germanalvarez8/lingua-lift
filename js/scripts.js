@@ -9,13 +9,9 @@ function mostrarModalAgregar() {
 }
 
 function ocultarModal() {
+    event.preventDefault()
     let modal = document.getElementById("modalAgregar");
     modal.style.visibility = "hidden";
-}
-
-let closeButtons = document.getElementsByClassName("close");
-for (let i = 0; i < closeButtons.length; i++) {
-    closeButtons[i].addEventListener("click", ocultarModal);
 }
 
 function checkButton(element) {
@@ -213,4 +209,27 @@ function showBooksTable(data) {
 
     htmlContent += "</table>";
     contenido.innerHTML = htmlContent;
+}
+
+function createTeacher() {
+    const formDatosPersonales = document.getElementById('formDatosPersonales');
+    const formData = new FormData(formDatosPersonales);
+    const formDataObject = Object.fromEntries(formData);
+
+    $.ajax({
+        type: "POST",
+        url: "app/controllers/TeacherController.php",
+        dataType: "json",
+        data: {
+            action: "addTeacher",
+            body: formDataObject
+        },
+        success: function(data) {
+            console.log(data);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr, ajaxOptions, thrownError);
+            alert(thrownError);
+        }
+    });
 }
