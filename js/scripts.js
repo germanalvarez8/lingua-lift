@@ -2,7 +2,7 @@ $( document ).ready(function() {
     getTeachers('#buttonTeachers')
 })
 
-function mostrarModalAgregar() {
+function mostrarModalAgregar(id) {
     let modal = document.getElementById("modalAgregar");
     modal.style.visibility = "visible";
 }
@@ -23,27 +23,6 @@ function checkButton(element) {
     $(element).addClass("hovered");
 }
 
-function getTeachers()
-{
-    checkButton('#buttonTeachers')
-
-    $.ajax({
-        type: "POST",
-        url: "app/controllers/TeacherController.php",
-        dataType: "json",
-        data: {
-            action: "getTeachers"
-        },
-        success: function(data) {
-            console.log(data);
-            showTeachersTable(data)
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(thrownError);
-        }
-    });
-}
-
 function getStudents(element)
 {
     checkButton(element)
@@ -56,7 +35,6 @@ function getStudents(element)
             action: "getStudents"
         },
         success: function(data) {
-            console.log(data);
             showStudentsTable(data)
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -77,7 +55,6 @@ function getBooks(element)
             action: "getBooks"
         },
         success: function(data) {
-            console.log(data);
             showBooksTable(data);
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -96,7 +73,6 @@ function getCourses()
             action: "getCourses"
         },
         success: function(data) {
-            console.log(data);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(thrownError);
@@ -143,69 +119,60 @@ function showStudentsTable(data) {
 
     htmlContent += "</table>";
     contenido.innerHTML = htmlContent;
+
+    form = [
+        {id: 'student_dni', name: 'Dni del Estudiante'},
+        {id: 'student_name', name: 'Nombre del Estudiante'},
+        {id: 'student_last_name', name: 'Apellido del Estudiante'},
+        {id: 'student_age', name: 'Edad'},
+        {id: 'student_country', name: 'Nacionalidad'},
+        {id: 'student_residency', name: 'Lugar de Residencia'},
+        {id: 'student_phone', name: 'Teléfono'},
+        {id: 'student_email', name: 'Email'},
+        {id: 'student_weekly_hours', name: 'Horas Semanales'},
+        {id: 'student_goal', name: 'Objetivo'},
+        {id: 'student_debts', name: 'Tiene Deudas'},
+    ]
+
+    showForm(form, 'createStudent()')
 }
 
-function showTeachersTable(data) {
-    let contenido = document.getElementById("contenido");
+function showForm(formFields, submitMethod) {
+    const formDatosPersonales = document.getElementById("formDatosPersonales");
+    const elementsToRemove = Array.from(formDatosPersonales.children).filter(element => !element.classList.contains("close"));
 
-    let htmlContent = "<table>";
-    htmlContent += `<tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Dni</th>
-        <th>Edad</th>
-        <th>Nacionalidad</th>
-        <th>Pais de residencia</th>
-        <th>Horas disponibles</th>
-        <th>Ocupacion</th>
-        <th>Titulo</th>
-        <th>Trabaja con niños</th>
-        <th></th>
-    </tr>`;
-
-    data.forEach(teacher => {
-        hasTitle = teacher.titulo == "0" ? 'No' : 'Si'
-        workWithKids = teacher.trabaja_ninos == "0" ? 'No' : 'Si'
-
-        htmlContent += "<tr>";
-        htmlContent += "<td>" + teacher.id + "</td>";
-        htmlContent += "<td>" + teacher.nombre + "</td>";
-        htmlContent += "<td>" + teacher.apellido + "</td>";
-        htmlContent += "<td>" + teacher.dni + "</td>";
-        htmlContent += "<td>" + teacher.edad + "</td>";
-        htmlContent += "<td>" + teacher.nacionalidad + "</td>";
-        htmlContent += "<td>" + teacher.pais_residencia + "</td>";
-        htmlContent += "<td>" + teacher.horas_disponibles + "</td>";
-        htmlContent += "<td>" + teacher.ocupacion + "</td>";
-        htmlContent += "<td>" + hasTitle + "</td>";
-        htmlContent += "<td>" + workWithKids + "</td>";
-        htmlContent += `<td><button value="${teacher.id}" class="btn btn-danger" onclick="deleteTeacher(this)">Borrar</button></td>`;
-        htmlContent += "</tr>";
+    elementsToRemove.forEach(element => {
+        formDatosPersonales.removeChild(element);
     });
 
-    htmlContent += "</table>";
-    contenido.innerHTML = htmlContent;
+    const submitButton = document.createElement("button");
+    submitButton.setAttribute("class", "btn btn-success");
+    submitButton.setAttribute("name", "enviar");
+    submitButton.setAttribute("onclick", submitMethod);
+    submitButton.textContent = 'Agregar';
+
+    formFields.forEach(field => {
+        field = makeTextInput(field.name, field.id);
+        formDatosPersonales.appendChild(field);
+    });
+
+    formDatosPersonales.appendChild(submitButton);
 }
 
-function deleteTeacher(element) {
-    $.ajax({
-        type: "POST",
-        url: "app/controllers/TeacherController.php",
-        dataType: "json",
-        data: {
-            action: "deleteTeacher",
-            body: {teacherId: element.value}
-        },
-        success: function(data) {
-            if (data) {
-                getTeachers()
-            }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(thrownError);
-        }
-    });
+function makeTextInput(label, id) {
+    let textInput = document.createElement("div");
+    const nombreEstudianteLabel = document.createElement("label");
+    nombreEstudianteLabel.textContent = label;
+    nombreEstudianteLabel.setAttribute("for", id);
+    const nombreEstudianteInput = document.createElement("input");
+    nombreEstudianteInput.type = "text";
+    nombreEstudianteInput.name = id;
+    nombreEstudianteInput.id = id;
+
+    textInput.appendChild(nombreEstudianteLabel)
+    textInput.appendChild(nombreEstudianteInput)
+
+    return textInput;
 }
 
 function showBooksTable(data) {
@@ -230,27 +197,12 @@ function showBooksTable(data) {
 
     htmlContent += "</table>";
     contenido.innerHTML = htmlContent;
-}
 
-function createTeacher() {
-    const formDatosPersonales = document.getElementById('formDatosPersonales');
-    const formData = new FormData(formDatosPersonales);
-    const formDataObject = Object.fromEntries(formData);
+    form = [
+        {id: 'teacher_name', name: 'Titulo'},
+        {id: 'teacher_editorial', name: 'Editorial'},
+        {id: 'teacher_publication_date', name: 'Fecha de publicacion'},
+    ]
 
-    $.ajax({
-        type: "POST",
-        url: "app/controllers/TeacherController.php",
-        dataType: "json",
-        data: {
-            action: "addTeacher",
-            body: formDataObject
-        },
-        success: function(data) {
-            console.log(data);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr, ajaxOptions, thrownError);
-            alert(thrownError);
-        }
-    });
+    showForm(form, 'createBook()')
 }

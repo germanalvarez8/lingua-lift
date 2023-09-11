@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS libros (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre CHAR(50) NOT NULL,
     editorial CHAR(50) NOT NULL,
-    dificultar ENUM('A2', 'A2', 'B1', 'B2', 'C1', 'C2') NOT NULL
+    dificultad ENUM('A1', 'A2', 'B1', 'B2', 'C1', 'C2') NOT NULL,
     fecha_publicacion DATE,
     status INT(1) NOT NULL DEFAULT 1
 );

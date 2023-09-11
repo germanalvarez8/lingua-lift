@@ -26,6 +26,7 @@
     <section class="layout">
         <div class="sidebar">
         <button
+            id="form_add_button"
             class="btn btn-success"
             onclick="mostrarModalAgregar()"
         >
@@ -39,36 +40,10 @@
     <div id="modalAgregar" class="modal">
         <form id="formDatosPersonales" class="modal-content" name="formDatosPersonales">
             <button class="close" onclick="ocultarModal()">×</button>
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre"/>
-
-            <label for="apellido">Apellido</label>
-            <input type="text" name="apellido" id="apellido"/>
-
-            <label for="dni">Dni</label>
-            <input type="text" name="dni" id="dni"/>
-
-            <label for="edad">Edad</label>
-            <input type="text" name="edad" id="edad"/>
-
-            <label for="nacionalidad">Nacionalidad</label>
-            <input type="text" name="nacionalidad" id="nacionalidad"/>
-
-            <label for="pais_residencia">Pais de residencia</label>
-            <input type="text" name="pais_residencia" id="pais_residencia"/>
-
-            <label for="horas_disponibles">Horas disponibles</label>
-            <input type="text" name="horas_disponibles" id="horas_disponibles"/>
-
-            <label for="ocupacion">Ocupacion</label>
-            <input type="text" name="ocupacion" id="ocupacion"/>
-
-            <label for="titulo">Titulo</label>
-            <input type ="text" name="titulo" id="titulo"/>
-
-            <button class="btn btn-success" name="enviar" onclick="createTeacher(this)">Agregar</button>
+            <!-- <button class="btn btn-success" name="enviar" onclick="createTeacher(this)">Agregar</button> -->
         </form>
     </div>
     <script src="js/scripts.js"></script>
+    <script src="js/teacher.js"></script>
 </body>
 </html>
