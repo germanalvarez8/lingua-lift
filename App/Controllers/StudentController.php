@@ -17,11 +17,11 @@ class StudentController
         echo json_encode($students);
     }
 
-    public function addStudent()
+    public function addStudent($teacherData)
     {
         try {
             $studentModel = new Student();
-            $students = $studentModel->getAll();
+            $students = $studentModel->add($teacherData);
         } catch (\Throwable $th) {
             var_dump($th->getMessage());die;
         }

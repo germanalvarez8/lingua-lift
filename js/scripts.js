@@ -62,11 +62,14 @@ function getCourses()
 
 function showForm(formFields, submitMethod) {
     const formDatosPersonales = document.getElementById("formDatosPersonales");
-    const elementsToRemove = Array.from(formDatosPersonales.children).filter(element => !element.classList.contains("close"));
 
-    elementsToRemove.forEach(element => {
-        formDatosPersonales.removeChild(element);
-    });
+    if (formDatosPersonales.children) {
+        const elementsToRemove = Array.from(formDatosPersonales.children).filter(element => !element.classList.contains("close"));
+
+        elementsToRemove.forEach(element => {
+            formDatosPersonales.removeChild(element);
+        });
+    }
 
     const submitButton = document.createElement("button");
     submitButton.setAttribute("class", "btn btn-success");

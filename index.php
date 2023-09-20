@@ -35,6 +35,13 @@
         </div>
         <div class="body" id="contenido"></div>
     </section>
+
+    <div id="modalAgregar" class="modal">
+        <form id="formDatosPersonales" class="modal-content" name="formDatosPersonales">
+            <button class="close" onclick="ocultarModal()">×</button>
+            <!-- <button class="btn btn-success" name="enviar" onclick="createTeacher(this)">Agregar</button> -->
+        </form>
+    </div>
     <script src="js/scripts.js"></script>
     <script src="js/teacher.js"></script>
     <script src="js/student.js"></script>
