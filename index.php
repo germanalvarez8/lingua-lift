@@ -34,7 +34,6 @@
         </button>
         </div>
         <div class="body" id="contenido"></div>
-        <div class="footer">5</div>
     </section>
 
     <div id="modalAgregar" class="modal">
@@ -45,5 +44,6 @@
     </div>
     <script src="js/scripts.js"></script>
     <script src="js/teacher.js"></script>
+    <script src="js/student.js"></script>
 </body>
 </html>

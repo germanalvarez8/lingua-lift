@@ -111,7 +111,7 @@ function createTeacher() {
         success: function(data) {
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr, ajaxOptions, thrownError);
+            event.preventDefault();
             alert(thrownError);
         }
     });
