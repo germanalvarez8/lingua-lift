@@ -1,12 +1,15 @@
 
+html {
+    background-color: #eff4f0;
+}
+
 .layout {
     width: auto;
     height: auto;
-    display: grid;
+    display: flex;
     grid:
-        "leftSide body rightSide" 1fr
-        "footer footer footer" auto
-        / auto 1fr auto;
+        "leftSide body";
+    justify-content: start;
 }
 
 .body {
@@ -14,10 +17,8 @@
     background-color: #eff4f0;
 }
 
-.footer { grid-area: footer; }
-
 .sidebar {
-    width: auto;
+    width: 150px;
     padding: 30px;
     background-color: #eff4f0;
 }
