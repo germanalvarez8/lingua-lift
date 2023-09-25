@@ -23,26 +23,6 @@ function checkButton(element) {
     $(element).addClass("hovered");
 }
 
-function getBooks(element)
-{
-    checkButton(element)
-
-    $.ajax({
-        type: "POST",
-        url: "app/controllers/BookController.php",
-        dataType: "json",
-        data: {
-            action: "getBooks"
-        },
-        success: function(data) {
-            showBooksTable(data);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(thrownError);
-        }
-    });
-}
-
 function getCourses()
 {
     $.ajax({
@@ -99,36 +79,4 @@ function makeTextInput(label, id) {
     textInput.appendChild(nombreEstudianteInput)
 
     return textInput;
-}
-
-function showBooksTable(data) {
-    let contenido = document.getElementById("contenido");
-
-    let htmlContent = "<table>";
-    htmlContent += `<tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Editorial</th>
-        <th>Fecha de publicacion</th>
-    </tr>`;
-
-    data.forEach(book => {
-        htmlContent += "<tr>";
-        htmlContent += "<td>" + book.id + "</td>";
-        htmlContent += "<td>" + book.nombre + "</td>";
-        htmlContent += "<td>" + book.editorial + "</td>";
-        htmlContent += "<td>" + book.fecha_publicacion + "</td>";
-        htmlContent += "</tr>";
-    });
-
-    htmlContent += "</table>";
-    contenido.innerHTML = htmlContent;
-
-    form = [
-        {id: 'teacher_name', name: 'Titulo'},
-        {id: 'teacher_editorial', name: 'Editorial'},
-        {id: 'teacher_publication_date', name: 'Fecha de publicacion'},
-    ]
-
-    showForm(form, 'createBook()')
 }

@@ -15,6 +15,7 @@ function showStudentsTable(data) {
         <th>Horas Semanales</th>
         <th>Objetivo</th>
         <th>Tiene Deudas</th>
+        <th>Accion</th>
     </tr>`;
 
     data.forEach(student => {
@@ -32,6 +33,7 @@ function showStudentsTable(data) {
         htmlContent += "<td>" + student.horas_cursado + "</td>";
         htmlContent += "<td>" + student.objetivo + "</td>";
         htmlContent += "<td>" + deudas + "</td>";
+        htmlContent += `<td><button value="${student.id}" class="btn btn-danger" onclick="deleteStudent(this)">Borrar</button></td>`;
         htmlContent += "</tr>";
     });
 
@@ -92,6 +94,26 @@ function createStudent() {
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr, ajaxOptions, thrownError);
+            alert(thrownError);
+        }
+    });
+}
+
+function deleteStudent(element) {
+    $.ajax({
+        type: "POST",
+        url: "app/controllers/StudentController.php",
+        dataType: "json",
+        data: {
+            action: "deleteStudent",
+            body: {studentId: element.value}
+        },
+        success: function(data) {
+            if (data) {
+                getStudents()
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
             alert(thrownError);
         }
     });

@@ -45,5 +45,6 @@
     <script src="js/scripts.js"></script>
     <script src="js/teacher.js"></script>
     <script src="js/student.js"></script>
+    <script src="js/book.js"></script>
 </body>
 </html>

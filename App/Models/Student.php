@@ -30,12 +30,24 @@ class Student
         return $profesores;
     }
 
-    public function add($teacherData) {
+    public function add($studentData) {
         $trabaja_ninos = 1;
         $activo = 1;
 
         $query = "INSERT INTO alumnos (nombre, apellido, dni, edad, nacionalidad, residencia, horas_cursado, telefono, mail, objetivo, atraso_pagos, activo)
-            VALUES ('{$teacherData["student_name"]}', '{$teacherData["student_last_name"]}', '{$teacherData["student_dni"]}', '{$teacherData["student_age"]}', '{$teacherData["student_country"]}', '{$teacherData["student_residency"]}', '{$teacherData["student_weekly_hours"]}', '{$teacherData["student_phone"]}', 'german', 'pito', '{$teacherData["student_debts"]}', {$activo})";
+            VALUES ('{$studentData["student_name"]}', '{$studentData["student_last_name"]}', '{$studentData["student_dni"]}', '{$studentData["student_age"]}', '{$studentData["student_country"]}', '{$studentData["student_residency"]}', '{$studentData["student_weekly_hours"]}', '{$studentData["student_phone"]}', 'german', 'pito', '{$studentData["student_debts"]}', {$activo})";
+
+        $stmt = $this->db->query($query);
+
+        if ($stmt === false) {
+            die("Error en la consulta: " . $this->db->error);
+        }
+
+        return $stmt;
+    }
+
+    public function delete($studentId) {
+        $query = "delete from alumnos where id=$studentId limit 1;";
 
         $stmt = $this->db->query($query);
 

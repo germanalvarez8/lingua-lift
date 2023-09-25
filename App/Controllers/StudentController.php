@@ -29,6 +29,19 @@ class StudentController
         header("Content-Type: application/json");
         echo json_encode($students);
     }
+
+    public function deleteStudent($teacherData)
+    {
+        try {
+            $studentModel = new Student();
+            $students = $studentModel->delete($teacherData['studentId']);
+        } catch (\Throwable $th) {
+            var_dump($th->getMessage());die;
+        }
+
+        header("Content-Type: application/json");
+        echo json_encode($students);
+    }
 }
 
 if (isset($_POST['action'])) {
@@ -36,6 +49,7 @@ if (isset($_POST['action'])) {
     $studentMethods = [
         'getStudents' => fn () => $studentController->getStudents(),
         'addStudent' => fn () => $studentController->addStudent($_POST['body']),
+        'deleteStudent' => fn () => $studentController->deleteStudent($_POST['body']),
     ];
 
     $method = $studentMethods[$_POST['action']];

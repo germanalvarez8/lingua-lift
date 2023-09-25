@@ -29,4 +29,32 @@ class Book
         $result->free();
         return $profesores;
     }
+
+    public function add($studentData) {
+        $trabaja_ninos = 1;
+        $activo = 1;
+
+        $query = "INSERT INTO libros (nombre, editorial, dificultad, fecha_publicacion, status)
+            VALUES ('{$studentData["book_name"]}', '{$studentData["book_editorial"]}', 'A1', '{$studentData["book_publication_date"]}', 1)";
+
+        $stmt = $this->db->query($query);
+
+        if ($stmt === false) {
+            die("Error en la consulta: " . $this->db->error);
+        }
+
+        return $stmt;
+    }
+
+    public function delete($bookId) {
+        $query = "delete from libros where id=$bookId limit 1;";
+
+        $stmt = $this->db->query($query);
+
+        if ($stmt === false) {
+            die("Error en la consulta: " . $this->db->error);
+        }
+
+        return $stmt;
+    }
 }

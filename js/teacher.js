@@ -109,6 +109,7 @@ function createTeacher() {
             body: formDataObject
         },
         success: function(data) {
+            alert('Profesor agregado correctamente! ')
         },
         error: function (xhr, ajaxOptions, thrownError) {
             event.preventDefault();

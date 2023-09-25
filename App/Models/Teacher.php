@@ -31,35 +31,27 @@ class Teacher
     }
 
     public function add($teacherData) {
-        $query = "INSERT INTO profesores (dni, nombre, apellido, edad, nacionalidad, pais_residencia, horas_disponibles, titulo, ocupacion, trabaja_ninos, activo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        $stmt = $this->db->prepare($query);
-
         $trabaja_ninos = 1;
         $activo = 1;
 
-        $values = [
-            $teacherData["dni"],
-            $teacherData["nombre"],
-            $teacherData["apellido"],
-            (int) $teacherData["edad"],
-            $teacherData["nacionalidad"],
-            $teacherData["pais_residencia"],
-            (int) $teacherData["horas_disponibles"],
-            $teacherData["titulo"],
-            $teacherData["ocupacion"],
-            $trabaja_ninos,
-            $activo
-        ];
+        $query = "INSERT INTO profesores (dni, nombre, apellido, edad, nacionalidad, pais_residencia, horas_disponibles, titulo, ocupacion, trabaja_ninos, activo)
+            VALUES ('{$teacherData["teacher_dni"]}',
+                '{$teacherData["teacher_name"]}',
+                '{$teacherData["teacher_last_name"]}',
+                '{$teacherData["teacher_age"]}',
+                '{$teacherData["teacher_country"]}',
+                '{$teacherData["teacher_residency"]}',
+                '{$teacherData["teacher_weekly_hours"]}',
+                '{$teacherData["teacher_title"]}',
+                '{$teacherData["teacher_occupation"]}',
+                '{$trabaja_ninos}',
+                '{$activo}')";
 
-        $refs = [];
-        foreach ($values as $key => $value) {
-            $refs[$key] = &$values[$key];
+        $stmt = $this->db->query($query);
+
+        if ($stmt === false) {
+            die("Error en la consulta: " . $this->db->error);
         }
-
-        call_user_func_array([$stmt, 'bind_param'], array_merge(['sssisssisss'], $refs));
-
-        $stmt->execute();
 
         return $stmt;
     }
