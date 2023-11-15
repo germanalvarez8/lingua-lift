@@ -11,16 +11,17 @@
     <nav>
         <div class="logo">linguaLift</div>
         <div class="nav-options">
-            <button id="buttonTeachers" class="nav-option" onclick="getTeachers()">Profesores</button>
+            <button id="buttonTeachers" class="nav-option" onclick="getTeachers(this)">Profesores</button>
             <button id="buttonStudents" class="nav-option" onclick="getStudents(this)">Alumnos</button>
             <button id="buttonBooks" class="nav-option" onclick="getBooks(this)">Libros</button>
-            <div class="dropdown">
+            <button id="buttonClasses" class="nav-option" onclick="getCourses(this)">Clases</button>
+            <!-- <div class="dropdown">
                 <button class="nav-option">Mi Perfil</button>
                 <div class="dropdown-content">
                 <a href="#">Mi Perfil</a>
                 <a href="#">Salir</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </nav>
     <section class="layout">
@@ -46,5 +47,6 @@
     <script src="js/teacher.js"></script>
     <script src="js/student.js"></script>
     <script src="js/book.js"></script>
+    <script src="js/classes.js"></script>
 </body>
 </html>

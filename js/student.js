@@ -57,23 +57,37 @@ function showStudentsTable(data) {
     showForm(form, 'createStudent()')
 }
 
-function getStudents(element)
+async function getStudents(element)
 {
-    checkButton(element)
+    if (element) {
+        checkButton(element)
+    }
 
-    $.ajax({
-        type: "POST",
-        url: "app/controllers/StudentController.php",
-        dataType: "json",
-        data: {
-            action: "getStudents"
-        },
-        success: function(data) {
-            showStudentsTable(data)
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(thrownError);
-        }
+    try {
+        const data = await getStudentsList();
+        showStudentsTable(data);
+    } catch (error) {
+        console.error(error);
+        alert("Error al obtener la lista de profesores");
+    }
+}
+
+function getStudentsList() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: "app/controllers/StudentController.php",
+            dataType: "json",
+            data: {
+                action: "getStudents"
+            },
+            success: function(data) {
+                resolve(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError);
+            }
+        });
     });
 }
 

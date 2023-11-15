@@ -1,20 +1,34 @@
-function getBooks(element)
+async function getBooks(element)
 {
-    checkButton(element)
+    if (element) {
+        checkButton(element)
+    }
 
-    $.ajax({
-        type: "POST",
-        url: "app/controllers/BookController.php",
-        dataType: "json",
-        data: {
-            action: "getBooks"
-        },
-        success: function(data) {
-            showBooksTable(data);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(thrownError);
-        }
+    try {
+        const data = await getBooksList();
+        showBooksTable(data);
+    } catch (error) {
+        console.error(error);
+        alert("Error al obtener la lista de profesores");
+    }
+}
+
+function getBooksList() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: "app/controllers/BookController.php",
+            dataType: "json",
+            data: {
+                action: "getBooks"
+            },
+            success: function(data) {
+                resolve(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError);
+            }
+        });
     });
 }
 

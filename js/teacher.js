@@ -1,20 +1,33 @@
-function getTeachers()
-{
-    checkButton('#buttonTeachers')
+async function getTeachers(element) {
+    if (element) {
+        checkButton(element);
+    }
 
-    $.ajax({
-        type: "POST",
-        url: "app/controllers/TeacherController.php",
-        dataType: "json",
-        data: {
-            action: "getTeachers"
-        },
-        success: function(data) {
-            showTeachersTable(data)
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(thrownError);
-        }
+    try {
+        const data = await getTeachersList();
+        showTeachersTable(data);
+    } catch (error) {
+        console.error(error);
+        alert("Error al obtener la lista de profesores");
+    }
+}
+
+function getTeachersList() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: "app/controllers/TeacherController.php",
+            dataType: "json",
+            data: {
+                action: "getTeachers"
+            },
+            success: function (data) {
+                resolve(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                reject(thrownError);
+            }
+        });
     });
 }
 

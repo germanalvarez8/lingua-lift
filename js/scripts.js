@@ -23,23 +23,6 @@ function checkButton(element) {
     $(element).addClass("hovered");
 }
 
-function getCourses()
-{
-    $.ajax({
-        type: "POST",
-        url: "app/controllers/CourseController.php",
-        dataType: "json",
-        data: {
-            action: "getCourses"
-        },
-        success: function(data) {
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(thrownError);
-        }
-    });
-}
-
 function showForm(formFields, submitMethod) {
     const formDatosPersonales = document.getElementById("formDatosPersonales");
 
