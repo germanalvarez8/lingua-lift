@@ -16,7 +16,7 @@ function getTeachersList() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "app/controllers/TeacherController.php",
+            url: window.location.href + "App/Controllers/TeacherController.php",
             dataType: "json",
             data: {
                 action: "getTeachers"

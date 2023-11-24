@@ -9,7 +9,7 @@ async function getBooks(element)
         showBooksTable(data);
     } catch (error) {
         console.error(error);
-        alert("Error al obtener la lista de profesores");
+        alert("Error al obtener la lista de libros");
     }
 }
 
@@ -17,7 +17,7 @@ function getBooksList() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "app/controllers/BookController.php",
+            url: window.location.href + "app/controllers/BookController.php",
             dataType: "json",
             data: {
                 action: "getBooks"

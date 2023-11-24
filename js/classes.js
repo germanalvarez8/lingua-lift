@@ -9,7 +9,7 @@ async function getCourses(element)
         showClassesTable(data);
     } catch (error) {
         console.error(error);
-        alert("Error al obtener la lista de profesores");
+        alert("Error al obtener la lista de clases");
     }
 }
 
@@ -17,7 +17,7 @@ function getClassesList() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "app/controllers/CourseController.php",
+            url: window.location.href + "app/controllers/CourseController.php",
             dataType: "json",
             data: {
                 action: "getCourses"

@@ -68,7 +68,7 @@ async function getStudents(element)
         showStudentsTable(data);
     } catch (error) {
         console.error(error);
-        alert("Error al obtener la lista de profesores");
+        alert("Error al obtener la lista de estudiantes");
     }
 }
 
@@ -76,7 +76,7 @@ function getStudentsList() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "app/controllers/StudentController.php",
+            url: window.location.href + "app/controllers/StudentController.php",
             dataType: "json",
             data: {
                 action: "getStudents"
