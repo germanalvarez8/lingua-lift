@@ -1,3 +1,5 @@
+var baseUrl = location.protocol + "//" + location.host + location.pathname;
+
 async function getTeachers(element) {
     if (element) {
         checkButton(element);
@@ -16,7 +18,7 @@ function getTeachersList() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "app/controllers/TeacherController.php",
+            url: baseUrl + "App/Controllers/TeacherController.php",
             dataType: "json",
             data: {
                 action: "getTeachers"
@@ -91,7 +93,7 @@ function showTeachersTable(data) {
 function deleteTeacher(element) {
     $.ajax({
         type: "POST",
-        url: "app/controllers/TeacherController.php",
+        url: baseUrl + "App/Controllers/TeacherController.php",
         dataType: "json",
         data: {
             action: "deleteTeacher",
@@ -115,7 +117,7 @@ function createTeacher() {
 
     $.ajax({
         type: "POST",
-        url: "app/controllers/TeacherController.php",
+        url: baseUrl + "App/Controllers/TeacherController.php",
         dataType: "json",
         data: {
             action: "addTeacher",

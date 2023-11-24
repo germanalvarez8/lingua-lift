@@ -1,3 +1,5 @@
+var baseUrl = location.protocol + "//" + location.host + location.pathname;
+
 function showStudentsTable(data) {
     let contenido = document.getElementById("contenido");
 
@@ -68,7 +70,7 @@ async function getStudents(element)
         showStudentsTable(data);
     } catch (error) {
         console.error(error);
-        alert("Error al obtener la lista de profesores");
+        alert("Error al obtener la lista de estudiantes");
     }
 }
 
@@ -76,7 +78,7 @@ function getStudentsList() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "app/controllers/StudentController.php",
+            url: baseUrl + "App/Controllers/StudentController.php",
             dataType: "json",
             data: {
                 action: "getStudents"
@@ -98,7 +100,7 @@ function createStudent() {
 
     $.ajax({
         type: "POST",
-        url: "app/controllers/StudentController.php",
+        url: baseUrl + "App/Controllers/StudentController.php",
         dataType: "json",
         data: {
             action: "addStudent",
@@ -116,7 +118,7 @@ function createStudent() {
 function deleteStudent(element) {
     $.ajax({
         type: "POST",
-        url: "app/controllers/StudentController.php",
+        url: baseUrl + "App/Controllers/StudentController.php",
         dataType: "json",
         data: {
             action: "deleteStudent",

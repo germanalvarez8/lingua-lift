@@ -1,5 +1,7 @@
+var baseUrl = location.protocol + "//" + location.host + location.pathname;
+
 $( document ).ready(function() {
-    getTeachers('#buttonTeachers')
+getTeachers('#buttonTeachers')
 })
 
 function mostrarModalAgregar(id) {

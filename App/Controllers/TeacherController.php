@@ -53,5 +53,5 @@ if (isset($_POST['action'])) {
     ];
 
     $method = $ordersCommission[$_POST['action']];
-    $method($_POST['body']);
+    $method($_POST['body'] ?? null);
 }

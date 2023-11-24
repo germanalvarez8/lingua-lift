@@ -1,3 +1,5 @@
+var baseUrl = location.protocol + "//" + location.host + location.pathname;
+
 async function getCourses(element)
 {
     if (element) {
@@ -9,7 +11,7 @@ async function getCourses(element)
         showClassesTable(data);
     } catch (error) {
         console.error(error);
-        alert("Error al obtener la lista de profesores");
+        alert("Error al obtener la lista de clases");
     }
 }
 
@@ -17,7 +19,7 @@ function getClassesList() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "app/controllers/CourseController.php",
+            url: baseUrl + "App/Controllers/CourseController.php",
             dataType: "json",
             data: {
                 action: "getCourses"
@@ -112,7 +114,7 @@ function submitCourse() {
 
     $.ajax({
         type: "POST",
-        url: "app/controllers/CourseController.php",
+        url: baseUrl + "App/Controllers/CourseController.php",
         dataType: "json",
         data: {
             action: "addCourse",
@@ -135,7 +137,7 @@ function submitCourse() {
 function deleteCourse(element) {
     $.ajax({
         type: "POST",
-        url: "app/controllers/CourseController.php",
+        url: baseUrl + "App/Controllers/CourseController.php",
         dataType: "json",
         data: {
             action: "deleteCourse",

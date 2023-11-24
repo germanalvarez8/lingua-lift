@@ -1,3 +1,5 @@
+var baseUrl = location.protocol + "//" + location.host + location.pathname;
+
 async function getBooks(element)
 {
     if (element) {
@@ -6,10 +8,11 @@ async function getBooks(element)
 
     try {
         const data = await getBooksList();
+        console.log(data);
         showBooksTable(data);
     } catch (error) {
         console.error(error);
-        alert("Error al obtener la lista de profesores");
+        alert("Error al obtener la lista de libros");
     }
 }
 
@@ -17,7 +20,7 @@ function getBooksList() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: "app/controllers/BookController.php",
+            url: baseUrl + "App/Controllers/BookController.php",
             dataType: "json",
             data: {
                 action: "getBooks"
@@ -71,28 +74,33 @@ function createBook() {
     const formData = new FormData(formDatosPersonales);
     const formDataObject = Object.fromEntries(formData);
 
-    $.ajax({
-        type: "POST",
-        url: "app/controllers/BookController.php",
-        dataType: "json",
-        data: {
-            action: "addBook",
-            body: formDataObject
-        },
-        success: function(data) {
-            getBooks()
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr, ajaxOptions, thrownError);
-            alert(thrownError);
-        }
+    return new Promise((resolve, reject) => {
+        console.log();
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "App/Controllers/BookController.php",
+            dataType: "json",
+            data: {
+                action: "addBook",
+                body: formDataObject
+            },
+            success: function(data) {
+                resolve(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                event.preventDefault()
+                console.log(xhr, ajaxOptions, thrownError);
+                alert(thrownError);
+                reject(thrownError);
+            }
+        });
     });
 }
 
 function deleteBook(element) {
     $.ajax({
         type: "POST",
-        url: "app/controllers/BookController.php",
+        url: baseUrl + "App/Controllers/BookController.php",
         dataType: "json",
         data: {
             action: "deleteBook",
