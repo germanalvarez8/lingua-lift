@@ -9,7 +9,7 @@ async function getTeachers(element) {
         const data = await getTeachersList();
         showTeachersTable(data);
     } catch (error) {
-        alert("Error al obtener la lista de profesores");
+        alert(`Error al obtener la lista de profesores: ${error}`);
     }
 }
 
