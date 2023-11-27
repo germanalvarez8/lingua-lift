@@ -9,7 +9,6 @@ async function getTeachers(element) {
         const data = await getTeachersList();
         showTeachersTable(data);
     } catch (error) {
-        console.error(error);
         alert("Error al obtener la lista de profesores");
     }
 }
@@ -27,6 +26,7 @@ function getTeachersList() {
                 resolve(data);
             },
             error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.responseText);
                 reject(thrownError);
             }
         });

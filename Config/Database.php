@@ -6,7 +6,7 @@ class Database {
     private $port = '8889';
     private $db_name = 'lingua_lift';
     private $username = 'root';
-    private $password = '';
+    private $password = 'roo';
 
     public function getConnection() {
         if (!self::$connection) {
