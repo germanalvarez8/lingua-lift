@@ -1,5 +1,3 @@
-var baseUrl = location.protocol + "//" + location.host + location.pathname;
-
 async function getTeachers(element) {
     if (element) {
         checkButton(element);
@@ -105,6 +103,7 @@ function deleteTeacher(element) {
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.responseText);
             alert(thrownError);
         }
     });

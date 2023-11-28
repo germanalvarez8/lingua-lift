@@ -1,5 +1,3 @@
-var baseUrl = location.protocol + "//" + location.host + location.pathname;
-
 function showStudentsTable(data) {
     let contenido = document.getElementById("contenido");
 
@@ -87,6 +85,7 @@ function getStudentsList() {
                 resolve(data);
             },
             error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.responseText);
                 reject(thrownError);
             }
         });
@@ -109,7 +108,7 @@ function createStudent() {
         success: function(data) {
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr, ajaxOptions, thrownError);
+            console.log(xhr.responseText);
             alert(thrownError);
         }
     });

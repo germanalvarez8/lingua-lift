@@ -13,8 +13,12 @@ class TeacherController
             $result = $th->getMessage();
         }
 
-        header("Content-Type: application/json");
-        echo json_encode($result);
+        if (json_encode($result) === false) {
+            var_dump('Error en la codificación JSON: ' . json_last_error_msg());die;
+        } else {
+            header("Content-Type: application/json");
+            echo json_encode($result);
+        }
     }
 
     public function addTeacher(array $teacherData)

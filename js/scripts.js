@@ -1,4 +1,9 @@
-var baseUrl = location.protocol + "//" + location.host + location.pathname;
+const PROTOCOL = location.protocol;
+const HOST = location.host;
+const BASE_URL = '/lingua-lift';
+const BASE_PATH = PROTOCOL + '//' + HOST + BASE_URL + '/';
+
+let baseUrl = BASE_PATH;
 
 $( document ).ready(function() {
 getTeachers('#buttonTeachers')

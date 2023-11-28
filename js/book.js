@@ -1,5 +1,3 @@
-var baseUrl = location.protocol + "//" + location.host + location.pathname;
-
 async function getBooks(element)
 {
     if (element) {
@@ -8,10 +6,8 @@ async function getBooks(element)
 
     try {
         const data = await getBooksList();
-        console.log(data);
         showBooksTable(data);
     } catch (error) {
-        console.error(error);
         alert("Error al obtener la lista de libros");
     }
 }
@@ -29,6 +25,7 @@ function getBooksList() {
                 resolve(data);
             },
             error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.responseText);
                 reject(thrownError);
             }
         });
@@ -75,7 +72,6 @@ function createBook() {
     const formDataObject = Object.fromEntries(formData);
 
     return new Promise((resolve, reject) => {
-        console.log();
         $.ajax({
             type: "POST",
             url: baseUrl + "App/Controllers/BookController.php",

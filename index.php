@@ -15,13 +15,6 @@
             <button id="buttonStudents" class="nav-option" onclick="getStudents(this)">Alumnos</button>
             <button id="buttonBooks" class="nav-option" onclick="getBooks(this)">Libros</button>
             <button id="buttonClasses" class="nav-option" onclick="getCourses(this)">Clases</button>
-            <!-- <div class="dropdown">
-                <button class="nav-option">Mi Perfil</button>
-                <div class="dropdown-content">
-                <a href="#">Mi Perfil</a>
-                <a href="#">Salir</a>
-                </div>
-            </div> -->
         </div>
     </nav>
     <section class="layout">
@@ -40,7 +33,6 @@
     <div id="modalAgregar" class="modal">
         <form id="formDatosPersonales" class="modal-content" name="formDatosPersonales">
             <button class="close" onclick="ocultarModal()">×</button>
-            <!-- <button class="btn btn-success" name="enviar" onclick="createTeacher(this)">Agregar</button> -->
         </form>
     </div>
     <script src="js/scripts.js"></script>

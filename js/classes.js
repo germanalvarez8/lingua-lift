@@ -1,5 +1,3 @@
-var baseUrl = location.protocol + "//" + location.host + location.pathname;
-
 async function getCourses(element)
 {
     if (element) {
@@ -28,6 +26,7 @@ function getClassesList() {
                 resolve(data)
             },
             error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.responseText);
                 reject(thrownError);
             }
         });
@@ -67,7 +66,6 @@ async function showClassesTable(data) {
         { id: 'course_book', name: 'Libro', values: books},
     ];
 
-    console.log(teachers, students, books);
     showCoursesForm(form, 'submitCourse()');
 }
 
