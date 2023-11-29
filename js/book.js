@@ -64,9 +64,16 @@ function showBooksTable(data) {
     ]
 
     showForm(form, 'createBook()')
+    const dateInput = document.getElementById('book_publication_date');
+
+    $(dateInput).datepicker({
+        format: 'yyyy-mm-dd',
+        startDate: '-3d'
+    });
 }
 
 function createBook() {
+    event.preventDefault();
     const formDatosPersonales = document.getElementById('formDatosPersonales');
     const formData = new FormData(formDatosPersonales);
     const formDataObject = Object.fromEntries(formData);
@@ -81,10 +88,10 @@ function createBook() {
                 body: formDataObject
             },
             success: function(data) {
+                getBooks();
                 resolve(data);
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                event.preventDefault()
                 console.log(xhr, ajaxOptions, thrownError);
                 alert(thrownError);
                 reject(thrownError);

@@ -31,11 +31,10 @@ class Student
     }
 
     public function add($studentData) {
-        $trabaja_ninos = 1;
         $activo = 1;
 
         $query = "INSERT INTO alumnos (nombre, apellido, dni, edad, nacionalidad, residencia, horas_cursado, telefono, mail, objetivo, atraso_pagos, activo)
-            VALUES ('{$studentData["student_name"]}', '{$studentData["student_last_name"]}', '{$studentData["student_dni"]}', '{$studentData["student_age"]}', '{$studentData["student_country"]}', '{$studentData["student_residency"]}', '{$studentData["student_weekly_hours"]}', '{$studentData["student_phone"]}', 'german', 'pito', '{$studentData["student_debts"]}', {$activo})";
+            VALUES ('{$studentData["student_name"]}', '{$studentData["student_last_name"]}', '{$studentData["student_dni"]}', '{$studentData["student_age"]}', '{$studentData["student_country"]}', '{$studentData["student_residency"]}', '{$studentData["student_weekly_hours"]}', '{$studentData["student_phone"]}', '{$studentData["student_email"]}', '{$studentData['student_goal']}', '{$studentData["student_debts"]}', {$activo})";
 
         $stmt = $this->db->query($query);
 

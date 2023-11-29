@@ -93,6 +93,7 @@ function getStudentsList() {
 }
 
 function createStudent() {
+    event.preventDefault();
     const formDatosPersonales = document.getElementById('formDatosPersonales');
     const formData = new FormData(formDatosPersonales);
     const formDataObject = Object.fromEntries(formData);

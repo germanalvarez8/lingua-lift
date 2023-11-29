@@ -110,6 +110,7 @@ function deleteTeacher(element) {
 }
 
 function createTeacher() {
+    event.preventDefault();
     const formDatosPersonales = document.getElementById('formDatosPersonales');
     const formData = new FormData(formDatosPersonales);
     const formDataObject = Object.fromEntries(formData);
@@ -126,7 +127,6 @@ function createTeacher() {
             alert('Profesor agregado correctamente! ')
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            event.preventDefault();
             alert(thrownError);
         }
     });

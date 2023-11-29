@@ -57,16 +57,17 @@ function showForm(formFields, submitMethod) {
 
 function makeTextInput(label, id) {
     let textInput = document.createElement("div");
-    const nombreEstudianteLabel = document.createElement("label");
-    nombreEstudianteLabel.textContent = label;
-    nombreEstudianteLabel.setAttribute("for", id);
-    const nombreEstudianteInput = document.createElement("input");
-    nombreEstudianteInput.type = "text";
-    nombreEstudianteInput.name = id;
-    nombreEstudianteInput.id = id;
+    const textInputLabel = document.createElement("label");
+    textInputLabel.textContent = label;
+    textInputLabel.setAttribute("for", id);
+    const input = document.createElement("input");
+    input.type = "text";
+    input.name = id;
+    input.id = id;
+    input.required = true;
 
-    textInput.appendChild(nombreEstudianteLabel)
-    textInput.appendChild(nombreEstudianteInput)
+    textInput.appendChild(textInputLabel)
+    textInput.appendChild(input)
 
     return textInput;
 }
